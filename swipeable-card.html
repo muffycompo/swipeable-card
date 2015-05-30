@@ -1,5 +1,5 @@
 <!--
-Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
 The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
@@ -16,42 +16,56 @@ A card that can be swiped to the left or right to move it out of the way.
 
 <link rel="import" href="../polymer/polymer.html">
 
-<link rel="stylesheet" href="swipeable-card.css" shim-shadowdom>
+<dom-module id="swipeable-card">
 
-<polymer-element name="swipeable-card" attributes="disableSwipe swiped">
-    
+<link rel="stylesheet" href="swipeable-card.css">
+
+</dom-module>
+
 <script>
 
-  Polymer('swipeable-card', {
-    
-    /**
-     * Fired when the card is swiped away.
-     *
-     * @event swipeable-card-swipe-away
-     */
-    
-    /**
-     * If true, the card can not be swiped.
-     *
-     * @attribute disableSwipe
-     * @type boolean
-     * @default false
-     */
-    disableSwipe: false,
+  Polymer({
+    is: 'swipeable-card',
 
-    /**
-     * Becomes `true` once the card has been swiped.  Set
-     * back to `false` to reset the swipe state.
-     *
-     * @attribute swiped
-     * @type boolean
-     * @default false
-     */
-    swiped: false,
-    
-    noCurve: false,
-    offsetRatio: 0.2,
-    widthRatio: 3,
+    properties: {
+      /**
+       * Fired when the card is swiped away.
+       *
+       * @event swipeable-card-swipe-away
+       */
+      
+      /**
+       * If true, the card can not be swiped.
+       *
+       * @attribute disableSwipe
+       * @type boolean
+       * @default false
+      */
+      disableSwipe: {
+        value: false,
+      },
+      /**
+       * Becomes `true` once the card has been swiped.  Set
+       * back to `false` to reset the swipe state.
+       *
+       * @attribute swiped
+       * @type boolean
+       * @default false
+      */
+      swiped: {
+        value: false,
+        observer: 'swipedChanged'
+      },
+      noCurve: {
+        value: false,
+      },
+      offsetRatio: {
+        value: 0.2,
+      },
+      widthRatio: {
+        value: 3,
+      },
+    },
     
     eventDelegates: {
       webkitTransitionEnd: 'transitionEnd',
@@ -129,4 +143,3 @@ A card that can be swiped to the left or right to move it out of the way.
     
   });
 </script>
-</polymer-element>
